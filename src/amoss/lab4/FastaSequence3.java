@@ -136,6 +136,7 @@ public class FastaSequence3
 		File outfile = new File ("outfile.txt");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(outfile));
 		bw.close();
+		System.out.println(sortedmap);
 		return sortedmap;
 		
 }
