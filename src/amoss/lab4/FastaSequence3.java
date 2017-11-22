@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -103,11 +104,7 @@ public class FastaSequence3
 		
 		}
 		System.out.println(countingmap.toString());
-	}
-		//Citation for help with this code is: https://stackoverflow.com/questions/8119366/sorting-hashmap-by-values, https://beginnersbook.com/2013/12/how-to-sort-hashmap-in-java-by-keys-and-values/
-		public LinkedHashMap <String, Integer> sortedByValues(HashMap<String, Integer> countingmap) throws IOException
-		{
-			List<String> sortedmap_keys = new ArrayList<>(countingmap.keySet());
+		List<String> sortedmap_keys = new ArrayList<>(countingmap.keySet());
 			List<Integer> sortedmap_values = new ArrayList<>(countingmap.values());
 			Collections.sort(sortedmap_keys);
 			Collections.sort(sortedmap_values);
@@ -133,32 +130,48 @@ public class FastaSequence3
 				}
 			}
 		
-		File outfile = new File ("outfile.txt");
-		BufferedWriter bw = new BufferedWriter(new FileWriter(outfile));
-		bw.close();
-		System.out.println(sortedmap);
-		return sortedmap;
 		
-}
+		//Citation for extra help with bufferedwriter: Lecture 5 notes, https://stackoverflow.com/questions/36961210/write-linkedhashmap-to-a-text-file
+			
+
+	
+			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("C:\\Users\\anhil\\Desktop\\outfile.txt"))); 
+			for(String key : sortedmap.keySet())
+			{
+				Integer myvalue = sortedmap.get(key);
+				
+				bw.write(">" + myvalue + "\n" + key + "\n" );
+				
+			}
+			bw.flush();
+			bw.close();
+			System.out.println(sortedmap);
+	}
 		
+	
+		
+	
 
 	//Citation for help: Anju, and stackoverflow.com/questions/8119366/sorting-hashmap-by-values
 	
 public static void main(String[] args) throws Exception
 	{
-	String infile = "C:\\Users\\anhil\\Desktop\\samplechimera.fasta";	
-	String outfile = "C:\\Users\\anhil\\Desktop\\outfile.txt";
-	writeUnique(infile, outfile);
-	List<FastaSequence3>fastaList=FastaSequence3.readFastaFile("C:\\Users\\anhil\\Desktop\\samplechimera.fasta");
+	
+	/*List<FastaSequence3>fastaList=FastaSequence3.readFastaFile("C:\\Users\\anhil\\Desktop\\samplechimera.fasta");
 		for(FastaSequence3 fs:fastaList)
 		{
 			System.out.println(fs.getHeader());
 			System.out.println(fs.getSequence());
 			System.out.println(fs.getGCratio());
+			
+			
+		}*/
+		String infile = "C:\\Users\\anhil\\Desktop\\samplechimera.fasta";	
+		String outfile = "C:\\Users\\anhil\\Desktop\\outfile.txt";
+		writeUnique(infile, outfile);
+		
 
-		}
 	}
-
 }
 
 //Credit for help: brainstorming and collaboration/feedback with Anju, Fareeha, Dr. Fodor, help from forums like www.biostars.org/p/68342, and stackoverflow, and www.beginnersbook.com/2013/03/constructors-in-java/ 
